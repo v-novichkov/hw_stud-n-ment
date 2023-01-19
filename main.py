@@ -7,12 +7,34 @@ class Student:
         self.courses_in_progress = []
         self.grades = {}
 
+    def rate_lect(self, lecturer, course, grade):
+        if isinstance(lecturer, Lecturer) and course in lecturer.courses_attached and course in self.courses_in_progress or course in self.finished_courses:
+            if grade > 0 and grade <= 10:
+                if course in lecturer.grades:
+                    lecturer.grades[course] += [grade]
+                else:
+                    lecturer.grades[course] = [grade]
+            else:
+                print('Оценка не может быть меньше 1 или больше 10')
+                return
+        else:
+            return 'Ошибка'
 
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
         self.surname = surname
         self.courses_attached = []
+
+
+
+class Lecturer(Mentor):
+    def __init__(self, name, surname):
+      super().__init__(name, surname)
+      self.grades = {}
+
+
+class Reviewer(Mentor):
 
     def rate_hw(self, student, course, grade):
         if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress:
@@ -23,18 +45,13 @@ class Mentor:
         else:
             return 'Ошибка'
 
-class Lecturer(Mentor):
+# для проверки
+Ivan_Ivanov = Student('Ivan', 'Ivanov', 'Male')
+Petr_Petrov = Lecturer('Petr', 'Petrov')
 
-class Reviewer(Mentor):
+Petr_Petrov.courses_attached.append('math')
+Ivan_Ivanov.courses_in_progress.append('math')
 
-best_student = Student('Ruoy', 'Eman', 'your_gender')
-best_student.courses_in_progress += ['Python']
+Ivan_Ivanov.rate_lect(Petr_Petrov, 'math', 1)
 
-cool_mentor = Mentor('Some', 'Buddy')
-cool_mentor.courses_attached += ['Python']
-
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 10)
-
-print(best_student.grades)
+print(Petr_Petrov.grades)
