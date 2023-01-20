@@ -31,7 +31,6 @@ class Student:
                 sum_grades += sum(v)
             else:
                 print(f'У студента {self.name} нет закрепленных курсов или оценок')
-                break
         mid_grades = sum_grades / count_grades / count_courses
         return mid_grades
 
@@ -92,14 +91,16 @@ Petr_Petrov = Lecturer('Petr', 'Petrov')
 Petr_Petrovs = Reviewer('Petr', 'Petrovs')
 
 Petr_Petrovs.courses_attached.append('math')
+Ivan_Ivanov.courses_in_progress.append('math')
+Ivan_Ivanov.courses_in_progress.append('info')
 Petr_Petrovs.courses_attached.append('info')
 Petr_Petrovs.rate_hw(Ivan_Ivanov, 'math', 8)
 Petr_Petrovs.rate_hw(Ivan_Ivanov, 'info', 8)
 
 Petr_Petrov.courses_attached.append('math')
-Ivan_Ivanov.courses_in_progress.append('math')
+
 Petr_Petrov.courses_attached.append('info')
-Ivan_Ivanov.courses_in_progress.append('info')
+
 Ivan_Ivanov.finished_courses.append('python')
 #
 Ivan_Ivanov.rate_lect(Petr_Petrov, 'math', 1)
@@ -108,5 +109,4 @@ Ivan_Ivanov.rate_lect(Petr_Petrov, 'info', 8)
 Ivan_Ivanov.rate_lect(Petr_Petrov, 'info', 1)
 
 print(Ivan_Ivanov.grades)
-# print(Petr_Petrov)
-# print(Ivan_Ivanov)
+print(Ivan_Ivanov)
